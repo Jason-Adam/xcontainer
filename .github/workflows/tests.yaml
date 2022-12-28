@@ -1,0 +1,25 @@
+name: tests
+
+on:
+  push:
+    paths-ignore:
+      - "README.md"
+
+jobs:
+  test:
+    name: build & test
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: setup go
+        uses: actions/setup-go@v3
+        with:
+          go-version-file: "go.mod"
+          check-latest: true
+          cache: true
+
+      - name: tests
+        run: make test

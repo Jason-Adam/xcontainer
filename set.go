@@ -18,6 +18,8 @@ type ConcurrentSet[O constraints.Ordered] struct {
 	setMap map[O]struct{}
 }
 
+var _ Set[int] = &ConcurrentSet[int]{}
+
 func NewConcurrentSet[O constraints.Ordered](vals ...O) ConcurrentSet[O] {
 	cs := ConcurrentSet[O]{
 		mu:     &sync.RWMutex{},
